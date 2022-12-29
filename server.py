@@ -34,6 +34,8 @@ def predict():
     # prediction = model.predict([[np.array(data['exp'])]])
     # output = prediction[0]
     YearsExp = request.form["Exp"]
+    
+    # we're changing this here because we need to transform the input data to something that the ML model accepts
     YearsExp = [[float(request.form.get('Exp'))]]
     result = float(model.predict(YearsExp))
 # (YearsExp[0])[0])[0]
@@ -42,6 +44,7 @@ def predict():
 @app.route('/api', methods=['POST'])
 def predict_from_request():
     data = request.get_json(force=True)
+    # we're changing this here because we need to transform the input data to something that the ML model accepts
     prediction = model.predict([[np.array(data['exp'])]])
     output = prediction[0]
     return jsonify(output)
