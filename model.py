@@ -16,7 +16,9 @@ dataset = pd.read_csv("DATA/Salary_Data.csv")
 print(dataset.head())
 
 # Create variable X and Y for training
+# First to last column
 X = dataset.iloc[:, :-1].values
+
 y = dataset.iloc[:, 1].values
 
 print(X)
