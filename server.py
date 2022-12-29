@@ -1,4 +1,5 @@
 # server.py
+
 """
 In this file, we will use the flask web framework 
 to handle the POST requests that we will get from the request.py.
@@ -37,6 +38,13 @@ def predict():
     result = float(model.predict(YearsExp))
 # (YearsExp[0])[0])[0]
     return render_template("index.html", **locals())
+
+@app.route('/api', methods=['POST'])
+def predict_from_request():
+    data = request.get_json(force=True)
+    prediction = model.predict([[np.array(data['exp'])]])
+    output = prediction[0]
+    return jsonify(output)
 
 
 # if we're running this file directly, it will run the Flask server
